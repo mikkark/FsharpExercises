@@ -69,12 +69,3 @@ module StableMarriageProblem =
         matches
 
     printfn "%A" res
-
-    let res2 =
-        let mutable x:int = 0
-        for i in 0 .. 9 do
-            for y in 1 .. 10 do
-                    x <- y * i
-        x
-
-    printfn "%d" res2
