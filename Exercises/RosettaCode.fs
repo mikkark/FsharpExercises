@@ -44,12 +44,15 @@ module StableMarriageProblem =
         let indexOfProposer = match Array.tryFindIndex(fun elem2 -> elem2 = proposerName) (snd proposee) with
                               | Some y -> y
         let isProposeeAlreadyMatched = match List.tryFind(fun elem -> fst elem = fst proposee) matches with
-                                       | None   -> Some 0
-                                         | Some existingMatch -> List.tryFindIndex(fun proposer -> snd proposer = snd existingMatch) matches
+                                       | None   -> None
+                                       | Some existingMatch -> Array.tryFindIndex(fun pref -> pref = snd existingMatch) (snd proposee)
         match isProposeeAlreadyMatched with
-        | Some 0     -> matches :: (fst proposee, proposerName)
-        | Some index -> if index < indexOfProposer then matches |> List.map(fun elem -> if fst elem = fst proposee then (fst proposee, proposerName) else elem) else matches :: (fst proposee, proposerName)
-    tt
+        | None                      -> (fst proposee, proposerName) :: matches
+        | Some indexOfExistingMatch -> if indexOfExistingMatch > indexOfProposer then 
+                                            (matches |> List.map(fun elem -> if fst elem = fst proposee then (fst proposee, proposerName) else elem)) 
+                                       else 
+                                            matches
+    
     let res =
         let mutable matches = []
         for round in 0..9 do
@@ -59,7 +62,7 @@ module StableMarriageProblem =
                                         | Some x -> Some x
                 match isProposerMatched with
                 | None -> matches <- findProposee (fst proposer) (snd proposer).[round] matches
-                | _    -> None
+                | _    -> matches <- matches
 //                match newMatch with
 //                | Some m -> matches <- m :: matches
 //                | None   -> matches <- matches
