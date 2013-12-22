@@ -45,22 +45,33 @@ module StableMarriageProblem =
                                        | None   -> None
                                        | Some existingMatch -> Array.tryFindIndex(fun pref -> pref = snd existingMatch) (snd proposee)
         match isProposeeAlreadyMatched with
-        | None                      -> (fst proposee, proposerName) :: matches
-        | Some indexOfExistingMatch -> if indexOfExistingMatch > indexOfProposer then 
+        | None                      -> printfn "%s becomes paired with %s" proposerName (fst proposee)
+                                       (fst proposee, proposerName) :: matches
+        | Some indexOfExistingMatch -> if indexOfExistingMatch > indexOfProposer then
                                             (matches |> List.map(fun elem -> if fst elem = fst proposee then (fst proposee, proposerName) else elem)) 
                                        else 
                                             matches
     
     let res =
         let mutable matches = []
-        for round in 0..9 do
+        let mutable misses = proposersWithPreferences |> List.map (fun proposer -> (fst proposer, 0))
+        let mutable round = 0
+        while matches.Length < 10 do
+            printfn "Round %d" round
             for proposer in proposersWithPreferences do
                 let isProposerMatched = match List.tryFind(fun elem -> snd elem = fst proposer) matches with
                                         | None   -> None
                                         | Some x -> Some x
                 match isProposerMatched with
-                | None -> matches <- findProposee (fst proposer) (snd proposer).[round] matches
+                | None -> printfn "%s prefers %s" (fst proposer) (snd proposer).[snd (misses |> List.find(fun prop -> fst prop = fst proposer))]
+                          matches <- findProposee (fst proposer) (snd proposer).[snd (misses |> List.find(fun prop -> fst prop = fst proposer))] matches
                 | _    -> matches <- matches
+                match List.tryFind(fun elem -> snd elem = fst proposer) matches with
+                | None   -> misses <- List.map(fun misser -> if fst misser = fst proposer then (fst misser, snd misser + 1) else misser) misses
+                | Some x -> misses <- misses
+            round <- round + 1
         matches
 
     printfn "%A" res
+
+    System.Console.ReadLine
