@@ -35,9 +35,7 @@ module StableMarriageProblem =
     let proposeesWithPreferences = 
         [for proposeeLine in proposees do 
             yield splitter proposeeLine]
-
-    //let matchedProposers = [] 
-    
+   
     let findProposee proposerName preferedProposee matches =
         let proposee = match List.tryFind(fun elem -> fst elem = preferedProposee) proposeesWithPreferences with
                        | Some x -> x
@@ -63,9 +61,6 @@ module StableMarriageProblem =
                 match isProposerMatched with
                 | None -> matches <- findProposee (fst proposer) (snd proposer).[round] matches
                 | _    -> matches <- matches
-//                match newMatch with
-//                | Some m -> matches <- m :: matches
-//                | None   -> matches <- matches
         matches
 
     printfn "%A" res
