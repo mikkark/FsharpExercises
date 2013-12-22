@@ -1,0 +1,7 @@
+C:\Users\karkkmik\Documents\Visual Studio 2013\Projects\Exercises\Tutorial1\bin\Debug\Tutorial1.XML
+C:\Users\karkkmik\Documents\Visual Studio 2013\Projects\Exercises\Tutorial1\bin\Debug\Tutorial1.exe
+C:\Users\karkkmik\Documents\Visual Studio 2013\Projects\Exercises\Tutorial1\bin\Debug\Tutorial1.pdb
+C:\Users\karkkmik\Documents\Visual Studio 2013\Projects\Exercises\Tutorial1\bin\Debug\FSharp.Core.dll
+C:\Users\karkkmik\Documents\Visual Studio 2013\Projects\Exercises\Tutorial1\bin\Debug\FSharp.Core.xml
+C:\Users\karkkmik\Documents\Visual Studio 2013\Projects\Exercises\Tutorial1\obj\Debug\Tutorial1.exe
+C:\Users\karkkmik\Documents\Visual Studio 2013\Projects\Exercises\Tutorial1\obj\Debug\Tutorial1.pdb

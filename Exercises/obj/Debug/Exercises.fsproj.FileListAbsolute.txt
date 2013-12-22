@@ -1,0 +1,10 @@
+c:\users\karkkmik\documents\visual studio 2013\Projects\Exercises\Exercises\bin\Debug\Exercises.XML
+c:\users\karkkmik\documents\visual studio 2013\Projects\Exercises\Exercises\bin\Debug\Exercises.pdb
+c:\users\karkkmik\documents\visual studio 2013\Projects\Exercises\Exercises\bin\Debug\FSharp.Core.dll
+c:\users\karkkmik\documents\visual studio 2013\Projects\Exercises\Exercises\bin\Debug\FSharp.Core.xml
+c:\users\karkkmik\documents\visual studio 2013\Projects\Exercises\Exercises\obj\Debug\Exercises.pdb
+c:\users\karkkmik\documents\visual studio 2013\Projects\Exercises\Exercises\bin\Debug\Exercises.exe
+c:\users\karkkmik\documents\visual studio 2013\Projects\Exercises\Exercises\obj\Debug\Exercises.exe
+C:\Omat projektit\Exercises\Exercises\bin\Debug\Exercises.XML
+C:\Omat projektit\Exercises\Exercises\obj\Debug\Exercises.exe
+C:\Omat projektit\Exercises\Exercises\obj\Debug\Exercises.pdb
