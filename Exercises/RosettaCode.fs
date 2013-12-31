@@ -1,7 +1,11 @@
-﻿//namespace RosettaCode
-
-module StableMarriageProblem =
+﻿module StableMarriageProblem =
     //http://rosettacode.org/wiki/Stable_marriage_problem
+
+    //This solution has a little less code lines than the solution at RosettaCode, but the lines are longer. I'm not using
+    //any types here to help, so the code is riddled with lots of snd and fst.
+    //Note: I also haven't done the second part of the exercise which is to mutate the couples to make the marriages unstable.
+    //I also haven't implemented any 'isStable' function to actually check the stability of the marriages, instead I rely on
+    //the algorithm to do its job.
 
     let proposers = 
         ["abe: abi, eve, cath, ivy, jan, dee, fay, bea, hope, gay";
@@ -17,30 +21,29 @@ module StableMarriageProblem =
     
     let proposees =
      ["abi: bob, fred, jon, gav, ian, abe, dan, ed, col, hal";
-  "bea: bob, abe, col, fred, gav, dan, ian, ed, jon, hal";
- "cath: fred, bob, ed, gav, hal, col, ian, abe, dan, jon";
-  "dee: fred, jon, col, abe, ian, hal, gav, dan, bob, ed";
-  "eve: jon, hal, fred, dan, abe, gav, col, ed, ian, bob";
-  "fay: bob, abe, ed, ian, jon, dan, fred, gav, col, hal";
-  "gay: jon, gav, hal, fred, bob, abe, col, ed, dan, ian";
- "hope: gav, jon, bob, abe, ian, dan, hal, ed, col, fred";
-  "ivy: ian, col, hal, gav, fred, bob, abe, ed, jon, dan";
-  "jan: ed, hal, gav, abe, bob, jon, col, ian, fred, dan"]
-
-    let splitter (s:string) = 
+      "bea: bob, abe, col, fred, gav, dan, ian, ed, jon, hal";
+      "cath: fred, bob, ed, gav, hal, col, ian, abe, dan, jon";
+      "dee: fred, jon, col, abe, ian, hal, gav, dan, bob, ed";
+      "eve: jon, hal, fred, dan, abe, gav, col, ed, ian, bob";
+      "fay: bob, abe, ed, ian, jon, dan, fred, gav, col, hal";
+      "gay: jon, gav, hal, fred, bob, abe, col, ed, dan, ian";
+      "hope: gav, jon, bob, abe, ian, dan, hal, ed, col, fred";
+      "ivy: ian, col, hal, gav, fred, bob, abe, ed, jon, dan";
+      "jan: ed, hal, gav, abe, bob, jon, col, ian, fred, dan"]
+      
+    let split (s:string) = 
         (s.Split(':').[0], 
          s.Split(':').[1].Split(',') |> Array.map(fun preference -> preference.Trim()))
 
-    let proposersWithPreferences = [for proposerLine in proposers do yield splitter proposerLine]
-    let proposeesWithPreferences = 
-        [for proposeeLine in proposees do 
-            yield splitter proposeeLine]
+    let proposersWithPreferences = [for proposerLine in proposers do yield split proposerLine]
+    let proposeesWithPreferences = [for proposeeLine in proposees do yield split proposeeLine]
    
+    let givePreferedProposee (proposersPreferences:string[], misses, proposerName)=
+        proposersPreferences.[snd (misses |> List.find(fun prop -> fst prop = proposerName))]
+
     let findProposee proposerName preferedProposee matches =
-        let proposee = match List.tryFind(fun elem -> fst elem = preferedProposee) proposeesWithPreferences with
-                       | Some x -> x
-        let indexOfProposer = match Array.tryFindIndex(fun elem2 -> elem2 = proposerName) (snd proposee) with
-                              | Some y -> y
+        let proposee = List.find(fun elem -> fst elem = preferedProposee) proposeesWithPreferences                       
+        let indexOfProposer = Array.findIndex((=) proposerName) (snd proposee)
         let isProposeeAlreadyMatched = match List.tryFind(fun elem -> fst elem = fst proposee) matches with
                                        | None   -> None
                                        | Some existingMatch -> Array.tryFindIndex(fun pref -> pref = snd existingMatch) (snd proposee)
@@ -63,8 +66,9 @@ module StableMarriageProblem =
                                         | None   -> None
                                         | Some x -> Some x
                 match isProposerMatched with
-                | None -> printfn "%s prefers %s" (fst proposer) (snd proposer).[snd (misses |> List.find(fun prop -> fst prop = fst proposer))]
-                          matches <- findProposee (fst proposer) (snd proposer).[snd (misses |> List.find(fun prop -> fst prop = fst proposer))] matches
+                | None -> let nextProposee = givePreferedProposee ((snd proposer), misses, (fst proposer))
+                          printfn "%s prefers %s" (fst proposer) nextProposee
+                          matches <- findProposee (fst proposer) nextProposee matches
                 | _    -> matches <- matches
                 match List.tryFind(fun elem -> snd elem = fst proposer) matches with
                 | None   -> misses <- List.map(fun misser -> if fst misser = fst proposer then (fst misser, snd misser + 1) else misser) misses
@@ -74,4 +78,4 @@ module StableMarriageProblem =
 
     printfn "%A" res
 
-    System.Console.ReadLine
+    let consoleVal = System.Console.ReadLine()
