@@ -4,6 +4,7 @@ module MaxByMultiplyingConsecutiveNumbers =
 // When given 500 character length string of numbers,
 // find the maximum value when multiplying five consecutive numbers
 // (= 34992 (_ numbers-in-string))
+//NOTE: this is actually Euler problem 8! http://projecteuler.net/index.php?section=problems&id=8
 
     let numbersinstring = "37900490610897696126265185408732594047834333441947" +
                           "01850393807417064181700348379116686008018966949867" +
