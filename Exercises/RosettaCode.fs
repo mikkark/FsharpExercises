@@ -1,4 +1,6 @@
-﻿module StableMarriageProblem =
+﻿namespace Rosetta
+
+module StableMarriageProblem =
     //http://rosettacode.org/wiki/Stable_marriage_problem
 
     //This solution has a little less code lines than the solution at RosettaCode, but the lines are longer. I'm not using

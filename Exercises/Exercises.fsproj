@@ -45,8 +45,8 @@
     <Compile Include="Library1.fs" />
     <Compile Include="ReaktorDevDays.fs" />
     <Compile Include="FsharpKoans.fs" />
-    <Compile Include="Euler.fs" />
     <Compile Include="RosettaCode.fs" />
+    <Compile Include="Euler.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
