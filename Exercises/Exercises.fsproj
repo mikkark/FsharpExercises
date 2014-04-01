@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Script.fsx" />
-    <Compile Include="Library1.fs" />
     <Compile Include="ReaktorDevDays.fs" />
     <Compile Include="FsharpKoans.fs" />
     <Compile Include="RosettaCode.fs" />
