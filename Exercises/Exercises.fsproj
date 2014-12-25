@@ -47,6 +47,9 @@
     <Compile Include="RosettaCode.fs" />
     <Compile Include="Euler.fs" />
     <Compile Include="Misc.fs" />
+    <Compile Include="uusitehtava.fs" />
+    <Compile Include="File1.fs" />
+    <Compile Include="File2.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
